@@ -53,6 +53,8 @@
     </a>
     <br>
     <a @click.once.self.prevent="methodTest('Test',$event)" href="">点击事件将只会触发一次 包含prevent</a>
+    <br>
+    <input @keyup.enter="methodTest('Test',$event)">
   </div>
 </template>
 
