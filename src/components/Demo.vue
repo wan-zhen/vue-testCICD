@@ -37,6 +37,22 @@
         {{i}} - {{v.data}}
       </li>
     </ul>
+
+    <button v-on:click="eventTest">Get Event</button>
+    <button v-on:click="methodTest('Demo',$event)">Demo Method</button>
+    <button v-on:click="methodTest('Test',$event)">Test Method</button>
+    <br>
+    <a v-on:click.prevent.self="methodTest('Test',$event)" href="">
+      點擊不要被元素默認行為影響，会阻止所有的点击
+      <a>不會有行為</a>
+    </a>
+    <br>
+    <a @click.self.prevent="methodTest('Test',$event)" href="">
+      點擊不要被元素默認行為影響，只会阻止对元素自身的点击
+      <a>會有行為</a>
+    </a>
+    <br>
+    <a @click.once.self.prevent="methodTest('Test',$event)" href="">点击事件将只会触发一次 包含prevent</a>
   </div>
 </template>
 
@@ -81,6 +97,13 @@ export default {
         .split('')
         .reverse()
         .join('');
+    },
+    eventTest: function(event) {
+      console.log(event.target);
+    },
+    methodTest: function(msg, event) {
+      console.log(msg);
+      console.log(event);
     }
   },
   // computed 加強版 当需要在数据变化时执行异步或开销较大的操作时，这个方式是最有用的
