@@ -15,13 +15,14 @@
       <!-- 用 v-else 相同的元素會被重複使用 所以在切換時 input 的值會被留著 -->
        <input placeholder="false">
     </p>
-        <p v-if="seen">
+    <p v-if="seen">
       看的到ㄏㄏ看不到ㄎㄎ
       <input placeholder="true" key="demo1">
     </p>
     <p v-else>
       看的到ㄎㄎ看不到ㄏㄏ
       <!-- 用 v-else 相同的元素會被重複使用 所以在切換時 input 的值會被留著 給獨立的 key 讓一樣的 element 不要被複用 -->
+      <!-- 也可以在 if else 設定 key 裡面的 element 全都不會被複用 會整個重繪 -->
        <input placeholder="false" key="demo2">
     </p>
     <button :disabled="false" @click="changeData">Button</button>
@@ -57,6 +58,13 @@
     <input @keyup.enter="methodTest('Test',$event)">
     <br>
     <button @click="$emit('update-msg','test')">通知爸爸的method</button>
+    <br>
+    <button @click="show = !show">
+      Toggle render
+    </button>
+    <transition name="slide-fade">
+      <p v-if="show">hello</p>
+    </transition>
   </div>
 </template>
 
@@ -68,7 +76,8 @@ export default {
       msg: 'demo',
       html: '<span style="color:red;">red</span>',
       seen: false,
-      demoItems: [{ data: 'a' }, { data: 'b' }, { data: 'c' }]
+      demoItems: [{ data: 'a' }, { data: 'b' }, { data: 'c' }],
+      show: true
     };
   },
   // 响应式依赖 计算属性是基于它们的依赖进行缓存的 (cache)
@@ -147,4 +156,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
 </style>
