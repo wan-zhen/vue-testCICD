@@ -6,8 +6,24 @@
     <p>{{reversedMessageMethods()}}</p>
     
     <p v-html="html"></p>
-    <p v-if="seen">看的到ㄏㄏ看不到ㄎㄎ</p>
-    <p v-else>看的到ㄎㄎ看不到ㄏㄏ</p>
+    <p v-if="seen">
+      看的到ㄏㄏ看不到ㄎㄎ
+      <input placeholder="true">
+    </p>
+    <p v-else>
+      看的到ㄎㄎ看不到ㄏㄏ
+      <!-- 用 v-else 相同的元素會被重複使用 所以在切換時 input 的值會被留著 -->
+       <input placeholder="false">
+    </p>
+        <p v-if="seen">
+      看的到ㄏㄏ看不到ㄎㄎ
+      <input placeholder="true" key="demo1">
+    </p>
+    <p v-else>
+      看的到ㄎㄎ看不到ㄏㄏ
+      <!-- 用 v-else 相同的元素會被重複使用 所以在切換時 input 的值會被留著 給獨立的 key 讓一樣的 element 不要被複用 -->
+       <input placeholder="false" key="demo2">
+    </p>
     <button :disabled="false" @click="changeData">Button</button>
   </div>
 </template>
