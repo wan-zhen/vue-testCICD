@@ -127,28 +127,37 @@ export default {
     }
   },
   beforeCreate: function() {
+    // instance 被 constructor 建立前
     console.warn('beforeCreate', this.msg);
   },
   created: function() {
+    // 實體建立完成(instance 被 constructor 建立後)。資料 $data 已可取得，但 $el 屬性還未被建立
     console.warn('created', this.msg);
   },
   beforeMount: function() {
+    // 執行元素掛載之前。 (綁定 DOM 之前)
     console.warn('beforeMount');
   },
   mounted: function() {
+    // 元素已掛載， $el 被建立。
+    // 如果你想改變 DOM 或資料，可以在這裡做，因為它還沒被瀏覽器「畫」出來，必須直到 updated 執行時，才會把最終的結果畫在瀏覽器上被看到。
+    console.log(this.$el);
     console.warn('mouted');
   },
   beforeUpdate: function() {
-    // 有值被改變
+    // 當資料變化時被呼叫，還不會描繪 View。 (資料更新，但尚未更新 DOM)
     console.warn('beforeUpdate');
   },
   updated: function() {
+    // DOM 的更新已經完成，View 被顯示在畫面上。 (因資料更新，而更新 DOM)
     console.warn('updated');
   },
   beforeDestroy: function() {
+    // 實體還可使用。 ( 移除 instance 之前 )
     console.warn('beforeDestroy');
   },
   destroyed: function() {
+    // 實體銷毀。所有綁定被解除、事件偵聽被移除、子實體也被銷毀。 ( 移除 instance 之後 )
     console.warn('destroyed');
   }
 };
