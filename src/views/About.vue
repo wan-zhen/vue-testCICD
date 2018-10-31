@@ -1,6 +1,7 @@
 <template>
   <div>
-    <demo></demo>
+    <demo @update-msg="update"></demo>
+    {{num}}
     <HelloWorld msg="test1"/>
     <hello-world msg="test2"></hello-world>
   </div>
@@ -16,6 +17,20 @@ export default {
   components: {
     Demo,
     HelloWorld
+  },
+  data: function() {
+    return {
+      num: 0
+    };
+  },
+  methods: {
+    update: function(inputdata) {
+      console.log(inputdata);
+      this.num += 1;
+    }
+  },
+  created: function() {
+    console.warn('about', this);
   }
 };
 </script>

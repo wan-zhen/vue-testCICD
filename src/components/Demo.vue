@@ -55,6 +55,8 @@
     <a @click.once.self.prevent="methodTest('Test',$event)" href="">点击事件将只会触发一次 包含prevent</a>
     <br>
     <input @keyup.enter="methodTest('Test',$event)">
+    <br>
+    <button @click="$emit('update-msg','test')">通知爸爸的method</button>
   </div>
 </template>
 
