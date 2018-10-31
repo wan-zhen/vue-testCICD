@@ -1,8 +1,8 @@
 <template>
   <div>
     <demo></demo>
-    <HelloWorld/>
-    <hello-world msg="test"></hello-world>
+    <HelloWorld msg="test1"/>
+    <hello-world msg="test2"></hello-world>
   </div>
 </template>
 

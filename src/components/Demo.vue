@@ -25,6 +25,18 @@
        <input placeholder="false" key="demo2">
     </p>
     <button :disabled="false" @click="changeData">Button</button>
+    <!-- 給唯一的 :key  類似 track-by  以便它能跟踪每个节点的身份，从而重用和重新排序现有元素 -->
+    <ul>
+      <li v-for="(v,i) in demoItems" :key="i">
+        {{i}} - {{v.data}}
+      </li>
+    </ul>
+    <!-- in of 都可 -->
+    <ul>
+      <li v-for="(v,i) of demoItems" :key="i">
+        {{i}} - {{v.data}}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -35,7 +47,8 @@ export default {
     return {
       msg: 'demo',
       html: '<span style="color:red;">red</span>',
-      seen: false
+      seen: false,
+      demoItems: [{ data: 'a' }, { data: 'b' }, { data: 'c' }]
     };
   },
   // 响应式依赖 计算属性是基于它们的依赖进行缓存的 (cache)
